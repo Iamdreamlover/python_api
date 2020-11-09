@@ -10,7 +10,7 @@ app = flask.Flask(__name__)
 
 
 @app.route("/score", methods=['POST'])
-def getscore() -> str:
+def getscore():
     errors = validate_greeting(request)
     if errors is not None:
         print(errors)
@@ -20,16 +20,17 @@ def getscore() -> str:
     dateFirst = str(content['date_first'])
     dateSecond = str(content['date_second'])
     channel = str(content['channel'])
-    cha_num = str(content['cha_num'])
+    chaNum = str(content['cha_num'])
     frame = str(content['frame'])
-    # print(frame)
+    score = getScore(channel, dateFirst, dateSecond, chaNum)
 
-    return jsonify(score = 123, probability = "Very hight")
+    return jsonify(score = score, probability = "Very hight")
 
 
 # def toDate(dateString):
 #     return datetime.datetime.strptime(dateString, '%Y-%m-%dT%H:%M:%S')
 
+def getScore(channel, dateFirst, dateSecond, chaNum) : return 10
 
 @app.errorhandler(InvalidUsage)
 def handle_invalid_usage(error):
